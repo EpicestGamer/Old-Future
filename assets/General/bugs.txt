@@ -1,0 +1,179 @@
+Bug, and possible fixes:
+
+When adding entities without killing anything game crashes
+problem code:
+public void simpleEntityInit() {
+        for (int i = 0; i < curEntities; i++) {
+            Box box1 = new Box(1.5f, 1.5f, 1.5f);
+            Geometry npcHoldIn = new Geometry("Box" + i, box1);
+            npcHoldIn.setLocalTranslation(new Vector3f(0, 0, 0));
+            Material mat1 = new Material(assetManager,
+                    "Common/MatDefs/Misc/Unshaded.j3md");
+            mat1.setTexture("ColorMap", assetManager.loadTexture("Textures/EnemyPlaceHolder.png"));
+            npcHoldIn.setMaterial(mat1);
+            Node npcDefault = new Node();
+            npcDefault.setName("" + i);
+            npcDefault.attachChild(npcHoldIn);
+            npcDefault.setLocalTranslation(0f, 64f, 100f);
+
+            Vector3f coords = TreeCoords.makeRandomSpawn();
+
+            //Display
+            entityList.add(i, npcDefault);
+            entityList.get(i).setName("ent" + i);
+            NPC.attachChild(entityList.get(i));
+            //Physics
+            entityBodiesList.add(i, new RigidBodyControl(npcShape, 0.05f));
+            entityBodiesList.get(i).setGravity(new Vector3f(0f, gravity, 0f));
+            entityBodiesList.get(i).setPhysicsLocation(coords);
+            bulletAppState.getPhysicsSpace().add(entityBodiesList.get(i));
+            //Health
+            entityHealths.add(i, 20);
+            //Type
+            entityTypes.add(i, 0);
+        }
+    }
+	
+	private void addEntities(int am, int type) {
+        for (int a = 0; a < am; a++) {
+            if (curEntities <= maxEntities) {
+
+
+                int nul = entityList.size();
+                for (int i = 0; i < entityList.size(); i++) {
+                    if (entityList.get(i) == null) {
+                        nul = i;
+                        break;
+                    }
+                }
+                if (type == 0) {
+                    if (nul == entityList.size()) {
+                        Box box1 = new Box(1.5f, 1.5f, 1.5f);
+                        Geometry npcHoldIn = new Geometry("Box" + entityList.size(), box1);
+                        npcHoldIn.setLocalTranslation(new Vector3f(0, 0, 0));
+                        Material mat1 = new Material(assetManager,
+                                "Common/MatDefs/Misc/Unshaded.j3md");
+                        mat1.setTexture("ColorMap", assetManager.loadTexture("Textures/EnemyPlaceHolder.png"));
+                        npcHoldIn.setMaterial(mat1);
+                        Node npcDefault = new Node();
+                        npcDefault.attachChild(npcHoldIn);
+                        npcDefault.setLocalTranslation(0f, 64f, 100f);
+
+                        Vector3f coords = TreeCoords.makeRandomSpawn();
+
+                        //Display
+                        int i = nul;
+                        entityList.set(i, npcDefault);
+                        entityList.get(i).setName("ent" + entityList.size());
+                        NPC.attachChild(entityList.get(i));
+                        //Physics
+                        entityBodiesList.set(i, new RigidBodyControl(npcShape, 0.05f));
+                        entityBodiesList.get(i).setGravity(new Vector3f(0f, gravity, 0f));
+
+                        entityBodiesList.get(i).setPhysicsLocation(coords);
+                        bulletAppState.getPhysicsSpace().add(entityBodiesList.get(i));
+                        //Health
+                        entityHealths.set(i, new Integer(20));
+                        //Type
+                        entityTypes.add(i, type);
+                        //
+                        curEntities++;
+                    } else {
+                        Box box1 = new Box(1.5f, 1.5f, 1.5f);
+                        Geometry npcHoldIn = new Geometry("Box" + entityList.size(), box1);
+                        npcHoldIn.setLocalTranslation(new Vector3f(0, 0, 0));
+                        Material mat1 = new Material(assetManager,
+                                "Common/MatDefs/Misc/Unshaded.j3md");
+                        mat1.setTexture("ColorMap", assetManager.loadTexture("Textures/EnemyPlaceHolder.png"));
+                        npcHoldIn.setMaterial(mat1);
+                        Node npcDefault = new Node();
+                        npcDefault.attachChild(npcHoldIn);
+                        npcDefault.setLocalTranslation(0f, 64f, 100f);
+
+                        Vector3f coords = TreeCoords.makeRandomSpawn();
+
+                        //Display
+                        int i = entityList.size();
+                        entityList.add(i, npcDefault);
+                        entityList.get(i).setName("ent" + entityList.size());
+                        NPC.attachChild(entityList.get(i));
+                        //Physics
+                        entityBodiesList.add(i, new RigidBodyControl(npcShape, 0.05f));
+                        entityBodiesList.get(i).setGravity(new Vector3f(0f, gravity, 0f));
+                        entityBodiesList.get(i).setPhysicsLocation(coords);
+                        bulletAppState.getPhysicsSpace().add(entityBodiesList.get(i));
+                        //Health
+                        entityHealths.add(i, new Integer(20));
+                        //Type
+                        entityTypes.add(i, type);
+                        //
+                        curEntities++;
+                    }
+                } else if (type == 1) {
+                    BoxCollisionShape ammo = new BoxCollisionShape(new Vector3f(1.5f, 1.5f, 1.5f));
+                    if (nul == entityList.size()) {
+                        Box box1 = new Box(1.5f, 1.5f, 1.5f);
+                        Geometry npcHoldIn = new Geometry("Box" + entityList.size(), box1);
+                        npcHoldIn.setLocalTranslation(new Vector3f(0, 0, 0));
+                        Material mat1 = new Material(assetManager,
+                                "Common/MatDefs/Misc/Unshaded.j3md");
+                        mat1.setTexture("ColorMap", assetManager.loadTexture("Textures/Bullets.png"));
+                        npcHoldIn.setMaterial(mat1);
+                        Node npcDefault = new Node();
+                        npcDefault.attachChild(npcHoldIn);
+                        npcDefault.setLocalTranslation(0f, 64f, 100f);
+
+                        Vector3f coords = TreeCoords.makeRandomSpawn();
+
+                        //Display
+                        int i = nul;
+                        entityList.set(i, npcDefault);
+                        entityList.get(i).setName("ent" + entityList.size());
+                        NPC.attachChild(entityList.get(i));
+                        //Physics
+                        entityBodiesList.set(i, new RigidBodyControl(ammo, 0.05f));
+                        entityBodiesList.get(i).setGravity(new Vector3f(0f, gravity, 0f));
+
+                        entityBodiesList.get(i).setPhysicsLocation(coords);
+                        bulletAppState.getPhysicsSpace().add(entityBodiesList.get(i));
+                        //Health
+                        entityHealths.set(i, new Integer(20));
+                        //Type
+                        entityTypes.add(i, type);
+                        //
+                        curEntities++;
+                    } else {
+                        Box box1 = new Box(1.5f, 1.5f, 1.5f);
+                        Geometry npcHoldIn = new Geometry("Box" + entityList.size(), box1);
+                        npcHoldIn.setLocalTranslation(new Vector3f(0, 0, 0));
+                        Material mat1 = new Material(assetManager,
+                                "Common/MatDefs/Misc/Unshaded.j3md");
+                        mat1.setTexture("ColorMap", assetManager.loadTexture("Textures/Bullets.png"));
+                        npcHoldIn.setMaterial(mat1);
+                        Node npcDefault = new Node();
+                        npcDefault.attachChild(npcHoldIn);
+                        npcDefault.setLocalTranslation(0f, 64f, 100f);
+
+                        Vector3f coords = TreeCoords.makeRandomSpawn();
+
+                        //Display
+                        int i = entityList.size();
+                        entityList.add(i, npcDefault);
+                        entityList.get(i).setName("ent" + entityList.size());
+                        NPC.attachChild(entityList.get(i));
+                        //Physics
+                        entityBodiesList.add(i, new RigidBodyControl(ammo, 0.05f));
+                        entityBodiesList.get(i).setGravity(new Vector3f(0f, gravity, 0f));
+                        entityBodiesList.get(i).setPhysicsLocation(coords);
+                        bulletAppState.getPhysicsSpace().add(entityBodiesList.get(i));
+                        //Health
+                        entityHealths.add(i, new Integer(20));
+                        //Type
+                        entityTypes.add(i, type);
+                        //
+                        curEntities++;
+                    }
+                }
+            }
+        }
+    }

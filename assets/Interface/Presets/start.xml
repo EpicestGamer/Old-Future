@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<nifty xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://nifty-gui.lessvoid.com/nifty-gui" xsi:schemaLocation="https://raw.githubusercontent.com/void256/nifty-gui/1.4/nifty-core/src/main/resources/nifty.xsd https://raw.githubusercontent.com/void256/nifty-gui/1.4/nifty-core/src/main/resources/nifty.xsd">
+    <useStyles filename="Interface/Styles/OF_Default/OF_Default_Style.xml" />
+    <screen id="start" controller="com.epicestgaming.ofgame.listeners.NIFTYListener">
+        <layer id="background" childLayout="center">
+            <image id="bg" filename="Textures/GUI/Old_Future_BG.jpg" width="100%" height="100%"/>
+        </layer>
+        <layer id="foreground" childLayout="vertical">
+            <panel id="panel_top" childLayout="center" width="75%" align="center" height="25%">
+                <image id="title" filename="Textures/GUI/Old_Future_TITLE.png"/>
+            </panel>
+            <panel id="panel_mid" childLayout="vertical" width="75%" align="center" height="50%">
+                <control name="button" childLayout="vertical" id="StartButton" visibleToMouse="true" width="50%" label="Play" align="center" height="25%">
+                    <interact onClick="setScreen(hud)"/>
+                </control>
+                <control name="button" childLayout="vertical" id="SettingsButton" visibleToMouse="true" width="50%" label="Settings" align="center" height="25%">
+                    <interact onClick="setScreen(settings)"/>
+                </control>
+                <control name="button" childLayout="vertical" id="QuitButton" visibleToMouse="true" width="50%" label="Quit" align="center" height="25%">
+                    <interact onClick="quitGame()"/>
+                </control>
+                <image id="healthImg" filename="General/logoprofessional.png" valign="center" align="center" width="30%" height="10%"/>
+            </panel>
+            <text text="" font="Interface/Fonts/Default.fnt" width="100%" height="100%" wrap="true" />
+        </layer>
+    </screen>
+    <screen id="hud" controller="com.epicestgaming.ofgame.listeners.NIFTYListener">
+        <layer id="background" childLayout="center">
+            <image id="hudIm" height="100%" width="100%" filename="Textures/GUI/Old_Future_HUDOverlay.png"/>
+        </layer>
+        <layer id="foreground" childLayout="horizontal">
+            <panel id="panel_left" childLayout="vertical" height="100%" width="80%"/>
+            <panel id="panel_right" childLayout="vertical" height="100%" width="20%">
+                <panel id="right1" childLayout="center" valign="center" height="5%" width="100%">
+                    <control name="label" id="health" color="#fff" text="Health: 100" width="100%" height="100%"/>
+                </panel>
+                <panel id="right2" childLayout="center" valign="center" height="5%" width="100%">
+                    <image id="healthImg" filename="Textures/Health/100.png" valign="center" align="center" height="100%" width="50%"/>
+                </panel>
+                <panel id="right3" childLayout="center" valign="center" height="10%" width="100%">
+                    <control name="label" id="mana" color="#fff" text="Mana: 50: 0" width="100%" height="100%"/>
+                </panel>
+                <panel id="right4" childLayout="center" valign="center" height="10%" width="100%">
+                    <control name="label" id="O2" color="#fff" text="O2: 5000" width="100%" height="100%"/>
+                </panel>
+                <panel id="right5" childLayout="center" valign="center" height="5%" width="100%">
+                    <control name="label" id="ammo" color="#fff" text="Ammo: ∞" width="100%" height="100%"/>
+                </panel>
+                <panel id="right6" childLayout="center" valign="center" height="5%" width="100%">
+                    <control name="label" id="loadedammo" color="#fff" text="Loaded Ammo: ∞" width="100%" height="100%"/>
+                </panel>
+                <panel id="right7" childLayout="center" valign="center" height="10%" width="100%">
+                    <control name="label" id="score" color="#fff" text="Score: 0" width="100%" height="100%"/>
+                </panel>
+                
+            </panel> 
+        </layer>
+    </screen>
+    <screen id="pause" controller="com.epicestgaming.ofgame.listeners.NIFTYListener">
+        <layer id="background" childLayout="center">
+        </layer>
+        <layer id="foreground" childLayout="vertical">
+            <panel id="panel_top" childLayout="center" width="75%" align="center" height="25%">
+            </panel>
+            <panel id="panel_mid" childLayout="vertical" width="75%" align="center" height="50%">
+                <control name="button" childLayout="vertical" id="StartButton" visibleToMouse="true" width="50%" label="Resume" align="center" height="25%">
+                    <interact onClick="setScreen(hud)"/>
+                </control>
+                <control name="button" childLayout="vertical" id="SettingsButton" visibleToMouse="true" width="50%" label="Settings" align="center" height="25%">
+                    <interact onClick="setScreen(settings)"/>
+                </control>
+                <control name="button" childLayout="vertical" id="QuitButton" visibleToMouse="true" width="50%" label="Quit" align="center" height="25%" interactOnClick="quitGame()">
+                    <interact onClick="quitGame()"/>
+                </control>
+            </panel>
+        </layer>
+    </screen>
+    <screen id="settings" controller="com.epicestgaming.ofgame.listeners.NIFTYListener">
+        <layer id="background" childLayout="center">
+            <image id="bg" filename="Textures/GUI/Old_Future_BG.jpg" width="100%" height="100%"/>
+        </layer>
+        <layer id="foreground" childLayout="vertical">
+            <panel id="panel_top" childLayout="vertical" width="75%" align="center" height="50%">
+                <control name="button" childLayout="vertical" id="fullButton" visibleToMouse="true" width="50%" label="Set Fullscreen" align="center" height="25%" interactOnClick="quitGame()">
+                    <interact onClick="setFull()"/>
+                </control>
+                <control name="button" childLayout="vertical" id="resButton" visibleToMouse="true" width="50%" label="Set Resolution" align="center" height="25%" interactOnClick="quitGame()">
+                    <interact onClick="setRes()"/>
+                </control>
+            </panel>
+            <panel id="panel_bot" childLayout="vertical" width="75%" align="center" height="50%">
+                <panel id="panel_bot_top" childLayout="vertical" width="50%" align="center" height="50%"/>
+                <control name="button" childLayout="vertical" id="BackButton" visibleToMouse="true" width="50%" label="Back" align="center" height="25%" interactOnClick="quitGame()">
+                    <interact onClick="setScreen(start)"/>
+                </control>
+            </panel>
+        </layer>
+    </screen>
+</nifty>
